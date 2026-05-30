@@ -55,3 +55,18 @@ export function getPhiraChartUrl(id: number): string {
 export function getPhiraUserUrl(id: number): string {
   return `https://phira.moe/user/${id}`;
 }
+
+export async function refreshRanking(token: string): Promise<{ success: boolean; message?: string }> {
+  const resp = await fetch(`${RANKING_API_BASE}/api/ranking/refresh`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+  if (!resp.ok) {
+    const data = await resp.json().catch(() => ({}));
+    throw new Error(data.message || `刷新失败 (${resp.status})`);
+  }
+  return resp.json();
+}

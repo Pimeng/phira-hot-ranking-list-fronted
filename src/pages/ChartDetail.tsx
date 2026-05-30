@@ -88,20 +88,20 @@ export default function ChartDetail() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050507]/50 to-[#050507]" />
 
         {/* Content */}
-        <div className="relative z-10 h-full max-w-6xl mx-auto px-6 flex items-end pb-12">
-          <div className="flex items-end gap-8">
+        <div className="relative z-10 h-full max-w-6xl mx-auto px-4 md:px-6 flex items-end pb-8 md:pb-12">
+          <div className="flex flex-col md:flex-row md:items-end gap-5 md:gap-8 w-full">
             {/* Cover */}
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-3xl overflow-hidden shadow-2xl shrink-0 liquid-glass p-1.5">
+            <div className="w-32 h-32 md:w-64 md:h-64 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shrink-0 liquid-glass p-1 md:p-1.5 mx-auto md:mx-0">
               <img
                 src={chart.illustration}
                 alt={chart.name}
-                className="w-full h-full object-cover rounded-2xl"
+                className="w-full h-full object-cover rounded-xl md:rounded-2xl"
               />
             </div>
 
             {/* Info */}
-            <div className="flex-1 min-w-0 pb-2">
-              <div className="flex items-center gap-3 mb-3">
+            <div className="flex-1 min-w-0 md:pb-2 text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-3 mb-2.5 md:mb-3">
                 <span className="text-xs px-3 py-1 rounded-full bg-white/5 text-white/50 border border-white/5">
                   {chart.level}
                 </span>
@@ -109,16 +109,16 @@ export default function ChartDetail() {
                   ID: {chart.id}
                 </span>
               </div>
-              <h1 className="text-3xl md:text-5xl font-bold text-white mb-2 truncate">
+              <h1 className="text-2xl md:text-5xl font-bold text-white mb-1.5 md:mb-2 truncate">
                 {chart.name}
               </h1>
-              <p className="text-white/50 text-lg mb-4">
+              <p className="text-white/50 text-base md:text-lg mb-3 md:mb-4">
                 {chart.composer}
               </p>
-              <div className="flex items-center gap-4 text-sm text-white/40">
-                <span>谱师: {chart.charter}</span>
+              <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-1 md:gap-4 text-xs md:text-sm text-white/40">
+                <span className="truncate">谱师: {chart.charter}</span>
                 {user && (
-                  <span>
+                  <span className="truncate">
                     上传者:{" "}
                     <a
                       href={`https://phira.moe/user/${chart.uploader}`}

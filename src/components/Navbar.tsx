@@ -25,14 +25,14 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 liquid-glass-strong rounded-full px-2 py-2 flex items-center gap-1 shadow-2xl"
+      className="fixed top-3 md:top-6 left-1/2 -translate-x-1/2 z-50 liquid-glass-strong rounded-full px-1.5 md:px-2 py-1.5 md:py-2 flex items-center gap-0.5 md:gap-1 shadow-2xl"
       style={{
         background: `radial-gradient(circle at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 50%)`,
       }}
     >
       <Link
         to="/"
-        className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+        className={`px-2.5 md:px-5 py-1.5 md:py-2 rounded-full text-[11px] md:text-sm font-medium whitespace-nowrap transition-all duration-300 ${
           isActive("/")
             ? "text-white bg-white/10"
             : "text-white/60 hover:text-white hover:bg-white/5"
@@ -42,7 +42,7 @@ export default function Navbar() {
       </Link>
       <Link
         to="/legendary"
-        className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+        className={`px-2.5 md:px-5 py-1.5 md:py-2 rounded-full text-[11px] md:text-sm font-medium whitespace-nowrap transition-all duration-300 ${
           isActive("/legendary")
             ? "text-white bg-white/10"
             : "text-white/60 hover:text-white hover:bg-white/5"
@@ -50,14 +50,14 @@ export default function Navbar() {
       >
         传奇殿堂
       </Link>
-      <div className="w-px h-4 bg-white/10 mx-1" />
+      <div className="w-px h-3.5 bg-white/10 mx-0.5 md:mx-1 shrink-0" />
       <a
         href="https://phira.moe"
         target="_blank"
         rel="noopener noreferrer"
-        className="px-5 py-2 rounded-full text-sm font-medium text-white/60 hover:text-white hover:bg-white/5 transition-all duration-300"
+        className="px-2.5 md:px-5 py-1.5 md:py-2 rounded-full text-[11px] md:text-sm font-medium text-white/60 hover:text-white hover:bg-white/5 transition-all duration-300 whitespace-nowrap"
       >
-        Phira 社区
+        Phira
       </a>
     </nav>
   );
