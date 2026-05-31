@@ -32,6 +32,10 @@ const waveFragmentShader = `
   }
 `;
 
+// Detect mobile for performance
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+const PLANE_SEGMENTS = isMobile ? [32, 16] : [64, 32];
+
 interface WavePlaneProps {
   opacity: number;
   speed: number;
@@ -53,14 +57,13 @@ function WavePlane({ opacity, speed, zOffset }: WavePlaneProps) {
 
   useFrame((state) => {
     if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value =
-        state.clock.elapsedTime * speed;
+      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime * speed;
     }
   });
 
   return (
     <mesh position={[0, 0, zOffset]}>
-      <planeGeometry args={[8, 4, 64, 32]} />
+      <planeGeometry args={[8, 4, PLANE_SEGMENTS[0], PLANE_SEGMENTS[1]]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={waveVertexShader}
@@ -74,15 +77,6 @@ function WavePlane({ opacity, speed, zOffset }: WavePlaneProps) {
   );
 }
 
-function WaveScene() {
-  return (
-    <>
-      <WavePlane opacity={0.15} speed={0.5} zOffset={-0.2} />
-      <WavePlane opacity={0.4} speed={1.2} zOffset={0.1} />
-    </>
-  );
-}
-
 interface NeonWaveProps {
   className?: string;
   height?: string;
@@ -93,11 +87,12 @@ export default function NeonWave({ className = "", height = "300px" }: NeonWaveP
     <div className={`w-full ${className}`} style={{ height }}>
       <Canvas
         camera={{ position: [0, -2, 3], fov: 60 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1]}
+        gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
         style={{ background: "transparent" }}
       >
-        <WaveScene />
+        <WavePlane opacity={0.12} speed={0.5} zOffset={-0.2} />
+        <WavePlane opacity={0.35} speed={1.0} zOffset={0.1} />
       </Canvas>
     </div>
   );

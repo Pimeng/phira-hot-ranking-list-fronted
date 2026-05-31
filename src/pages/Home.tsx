@@ -237,7 +237,6 @@ export default function Home() {
               key={chart.id}
               chart={chart}
               index={i}
-              delay={Math.min(i * 50, 500)}
             />
           ))}
         </div>
@@ -306,16 +305,26 @@ export default function Home() {
       <footer className="relative z-10 border-t border-white/5 py-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="text-white/20 text-xs mb-4">
-            数据来源: Phira Hot Ranking API · Phira 社区
+            数据来源: 
+            <a
+              href="https://phira.moe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/30 text-xs hover:text-[#00f0ff] transition-colors"
+            >
+            Phira
+            </a>
+            ·
+            友情链接：
+            <a
+              href="https://phira.dmocken.top/"
+              target="_blank"
+              className="text-white/30 text-xs hover:text-[#00f0ff] transition-colors"
+            >
+            Phira下载
+            </a>
           </p>
-          <a
-            href="https://phira.moe"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/30 text-xs hover:text-[#00f0ff] transition-colors"
-          >
-            phira.moe
-          </a>
+          
           <p className="text-white/10 text-xs mt-6">
             Made for the rhythm.
           </p>

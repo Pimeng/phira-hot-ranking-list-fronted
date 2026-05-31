@@ -120,11 +120,10 @@ export default function LegendaryHall() {
                   willChange: "transform",
                 }}
               >
-                {col.map((item, itemIdx) => (
+                {col.map((item) => (
                   <LegendaryCard
                     key={item.chart_id}
                     item={item}
-                    delay={itemIdx * 100}
                     onClick={() => navigate(`/chart/${item.chart_id}`)}
                   />
                 ))}
@@ -137,46 +136,15 @@ export default function LegendaryHall() {
   );
 }
 
-interface LegendaryCardProps {
-  item: ChartWithDetail;
-  delay: number;
-  onClick: () => void;
-}
-
-function LegendaryCard({ item, delay, onClick }: LegendaryCardProps) {
-  const [isVisible, setIsVisible] = useState(false);
+function LegendaryCard({ item, onClick }: { item: ChartWithDetail; onClick: () => void }) {
   const [imgLoaded, setImgLoaded] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), delay);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (cardRef.current) observer.observe(cardRef.current);
-    return () => observer.disconnect();
-  }, [delay]);
-
   const illustration = item.detail?.illustration || "";
 
   return (
     <div
-      ref={cardRef}
-      className={`cursor-pointer group transition-all duration-700 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
-      style={{
-        transitionDelay: `${delay}ms`,
-        transform: isVisible
-          ? "scaleY(1) skewY(0deg)"
-          : "scaleY(1.05) skewY(1deg)",
-      }}
+      className="cursor-pointer group"
       onClick={onClick}
+      style={{ contentVisibility: "auto", containIntrinsicHeight: "300px" }}
     >
       <div className="relative rounded-3xl overflow-hidden liquid-glass">
         {/* Image */}
